@@ -301,6 +301,16 @@ h1, h2, h3, h4, .brand__name, .counter {
   object-fit: contain;
   filter: brightness(0) invert(1);
 }
+@media (max-width: 640px) {
+  .brand__logomark {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  .brand__logomark img {
+    object-fit: fill;
+    filter: none;
+  }
+}
 
 .brand__text { display: flex; flex-direction: column; }
 
