@@ -35,13 +35,14 @@
       </a>
 
       <nav class="header__nav" aria-label="Primary navigation">
+        <a href="#about" class="nav__link">About</a>
         <a href="#capabilities" class="nav__link">Capabilities</a>
         <a href="#metrics" class="nav__link">Metrics</a>
+        <a href="./teams.html" class="nav__link">Teams</a>
         <a href="#programs" class="nav__link">Programs</a>
-        <a href="#contact" class="nav__link">Contact</a>
       </nav>
 
-      <a class="btn btn--outline header__cta" href="https://www.owaspmanit.in/contact">Join Network</a>
+      <a class="btn btn--outline header__cta" href="#contact">Contact</a>
 
       <button class="header__burger" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -154,6 +155,44 @@
         <span>Capture The Flag</span><span>·</span>
         <span>Web Vulnerabilities</span><span>·</span>
         <span>Ethical Hacking</span><span>·</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════ ABOUT / MISSION ═══════════════════════ -->
+  <section class="about section" id="about">
+    <div class="container">
+      <header class="section__header">
+        <p class="section__kicker">About Our Mission</p>
+        <h2 class="section__title">Workshops, training, education,<br>and community.</h2>
+      </header>
+
+      <div class="about__content">
+        <p class="about__lead">
+          OWASP MANIT exists to make cybersecurity approachable, practical, and collaborative. We create a space where students can learn core security concepts, apply them through guided experiences, and grow within an active technical community.
+        </p>
+
+        <div class="about__grid">
+          <article class="about-card">
+            <h3>Workshops</h3>
+            <p>Interactive sessions focused on secure coding, web security, and hands-on problem solving.</p>
+          </article>
+
+          <article class="about-card">
+            <h3>Training</h3>
+            <p>Structured learning tracks that help members build practical cybersecurity skills step by step.</p>
+          </article>
+
+          <article class="about-card">
+            <h3>Education</h3>
+            <p>Foundational resources, mentorship, and guided exploration to strengthen security awareness and technical depth.</p>
+          </article>
+
+          <article class="about-card">
+            <h3>Community</h3>
+            <p>A student-driven network for collaboration, peer support, events, and shared growth in cybersecurity.</p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -306,6 +345,66 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════ EVENTS ═══════════════════════ -->
+  <section class="events section" id="events">
+    <div class="container">
+      <header class="section__header">
+        <p class="section__kicker">Events Timeline</p>
+        <h2 class="section__title">Past events and upcoming<br>events, separated clearly.</h2>
+      </header>
+
+      <div class="events__stack">
+        <div class="events-group">
+          <div class="events-group__head">
+            <span class="pill pill--purple">Upcoming Events</span>
+            <p class="events-group__intro">What members can prepare for next across workshops, training, and community activities.</p>
+          </div>
+
+          <div class="events-grid">
+            <article class="event-card event-card--upcoming">
+              <span class="event-card__date">April 2026</span>
+              <h3>Secure Web Workshop</h3>
+              <p>Guided practical session on common web vulnerabilities, secure coding patterns, and real attack demonstrations.</p>
+            </article>
+
+            <article class="event-card event-card--upcoming">
+              <span class="event-card__date">May 2026</span>
+              <h3>Beginner Training Bootcamp</h3>
+              <p>A structured training series covering networking basics, Linux fundamentals, recon workflows, and defensive thinking.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="events-group">
+          <div class="events-group__head">
+            <span class="pill">Past Events</span>
+            <p class="events-group__intro">A snapshot of recent chapter activity and programs already delivered to the community.</p>
+          </div>
+
+          <div class="events-grid events-grid--past">
+            <article class="event-card">
+              <span class="event-card__date">CyberBasics 1.0</span>
+              <h3>Cyber Hygiene and Awareness Sessions</h3>
+              <p>Introductory learning sessions focused on phishing defense, ransomware awareness, and digital safety habits.</p>
+            </article>
+
+            <article class="event-card">
+              <span class="event-card__date">OWASP MANIT CTF</span>
+              <h3>Practical Security Challenge Event</h3>
+              <p>Hands-on competition with web, crypto, forensics, and reversing tracks designed for active problem solving.</p>
+            </article>
+
+            <article class="event-card">
+              <span class="event-card__date">CyberHunter Ops</span>
+              <h3>Threat Hunting and Response Drills</h3>
+              <p>Scenario-based exercises built around investigation flow, team coordination, and analyst-style decision making.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════════════════ CTA / CONTACT ═══════════════════════ -->
   <section class="contact section" id="contact">
     <div class="container">
@@ -339,6 +438,10 @@
             <div class="form-field">
               <label for="id_email">Email Address</label>
               <input type="email" id="id_email" placeholder="student@example.com" autocomplete="email" required>
+            </div>
+            <div class="form-field">
+              <label for="id_message">Message</label>
+              <textarea id="id_message" placeholder="Tell us what you want to learn or ask" rows="5" required></textarea>
             </div>
             <button type="submit" class="btn btn--primary btn--full">
               <span>Send Message</span>
