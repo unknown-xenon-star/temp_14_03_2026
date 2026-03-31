@@ -1552,7 +1552,14 @@ h1, h2, h3, h4, .brand__name, .counter {
 .team-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
+  gap: 2.1rem;
+}
+
+@media (min-width: 1280px) {
+  .team-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.4rem;
+  }
 }
 
 .team-card {
@@ -1696,40 +1703,11 @@ h1, h2, h3, h4, .brand__name, .counter {
   color: var(--text);
 }
 
-.team-card__meta {
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 0.9rem;
-}
-
-.team-card__bio {
-  font-size: 0.8rem;
-  line-height: 1.75;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
-}
-
-.team-card__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-}
-
-.team-card__tags span {
-  padding: 0.28rem 0.65rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  background: rgba(0,229,255,0.03);
-}
-
 @media (max-width: 1024px) {
   .page-hero__inner,
   .team-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem;
   }
 
   .page-hero__inner {
