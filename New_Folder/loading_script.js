@@ -3,13 +3,18 @@ var STORAGE_KEY = 'owasp_loader_visited';
 var isReturning = !!localStorage.getItem(STORAGE_KEY);
 localStorage.setItem(STORAGE_KEY, '1');
 
+var isRedirecting = !!window.location.hash.substring(1);
+var Redirecting_url = window.location.hash.substring(1);
+
+
 // First visit: 2200ms  |  Returning: 800ms
 var LOAD_DURATION = isReturning ? 800 : 2200;
 
 // Expose so the inline redirect script in HTML reads the right delay
 window.__loaderDuration = LOAD_DURATION;
-// ─────────────────────────────────────────────────────────────────────────────
 
+
+// ─────────────────────────────────────────────────────────────────────────────
 // // Rotating sublabel strings
 // var sublabels = [
 //   'scanning attack vectors...',
@@ -59,9 +64,10 @@ function init() {
     direction: 'alternate',
     easing: 'easeInOutQuint',
     autoplay: true,
-    duration: function () {
-      return anime.random(100, 270);
+    duration: function() {
+      return anime.random(0, 270);
     },
+    delay: [45, 250],
     loop: true,
   });
 
@@ -78,14 +84,14 @@ function init() {
     duration: LOAD_DURATION,
   });
 
-  anime({
+  var stroke_anim1 = anime({
     targets: ['#svg_12'],
     strokeDashoffset: [anime.setDashoffset, 0],
     points: [
       {
         value: [
           '88.5,80.45313l272.5,79.54688l-231,189l-41.5,-268.54688z',
-          '207.5,185.45313l156.5,-26.45313l,190l-44.5,-268.54687z',
+          '207.5,185.45313l156.5,-26.45313l,190l-44.5,-268.54687z'
         ],
         duration: LOAD_DURATION * 9,
       },
@@ -98,46 +104,54 @@ function init() {
     loop: true,
   });
 
-  // Fixed: target #svg_13 directly (it IS the path, no child path)
-  anime({
-    targets: ['#svg_13'],
-    easing: 'easeOutInCirc',
+  var rotate_stroke_anime = anime({
+    targets: ['#svg_13 path'],
+    easing: ['easeOutInCirc'],
     strokeDashoffset: [10, 0],
-    duration: isReturning ? 400 : 1000,
+    duration: isRedirecting ? 400 : 1000,
     opacity: .5,
-    skewY: 10,
-    skewX: 10,
+    skewY: 100,
+    skewX: 100,
     rotate: [45, 90],
     autoplay: true,
     direction: 'alternate',
     loop: true,
     stroke: ['#150485', '#590995', '#c62a88', '#03c4a1'],
   });
-}
+};
 
-// Loading bar — duration driven by visit history
+// Progress bar fills once; redirect fires in the complete callback when bar reaches 100%
 anime({
   targets: '.loader-bar-fill',
   width: ['0%', '100%'],
   easing: isReturning ? 'easeOutQuart' : 'easeInOutSine',
   duration: LOAD_DURATION,
-  direction: 'alternate',
-  loop: true,
+  direction: isReturning ? 'normal':'alternate' ,
+  loop: isRedirecting ? false: true,
+  complete: function() {
+    if (isRedirecting) {
+      var parts = Redirecting_url.split(',');
+      var page = parts[0];
+      var section = parts[1];
+      var url = page + '.html';
+      if (section) url += '#' + section;
+      window.location.href = url;
+    }
+  }
 });
 
-// Percent counter
 anime({
   targets: '.loader-percent',
   innerHTML: [0, 100],
   round: 1,
   easing: isReturning ? 'easeOutQuart' : 'easeInOutSine',
   duration: LOAD_DURATION,
-  direction: 'alternate',
-  loop: true,
-  update: function (anim) {
-    var num = Math.round(anim.progress);
-    var label = 'LOADING... ' + num + '%';
+  direction: isRedirecting ? 'normal':'alternate' ,
+  loop: isRedirecting ? false: true,
+  update: function(anim) {
     var percentElement = document.querySelector('.loader-percent');
+    var num = Math.round(anim.progress);
+    var label = 'SECURE LOADING... ' + num + '%';
     percentElement.textContent = label;
     percentElement.setAttribute('data-text', label);
   }
