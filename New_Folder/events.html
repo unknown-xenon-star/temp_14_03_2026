@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OWASP MANIT Events</title>
+  <meta name="description" content="Event details, galleries, and program highlights from OWASP MANIT.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient__orb ambient__orb--a"></div>
+    <div class="ambient__orb ambient__orb--b"></div>
+    <div class="ambient__orb ambient__orb--c"></div>
+    <div class="ambient__grid"></div>
+    <div class="ambient__noise"></div>
+  </div>
+
+  <header class="header" id="top">
+    <div class="header__inner container">
+      <a class="header__brand" href="./home.html" aria-label="OWASP MANIT Home">
+        <div class="brand__logomark">
+          <img src="../logo_owasp.png" alt="OWASP">
+        </div>
+        <div class="brand__text">
+          <span class="brand__sub">OWASP Chapter</span>
+          <strong class="brand__name">MANIT</strong>
+        </div>
+      </a>
+
+      <nav class="header__nav" aria-label="Primary navigation">
+        <a href="./home.html#about" class="nav__link">About</a>
+        <a href="./home.html#programs" class="nav__link">Programs</a>
+        <a href="#events-gallery" class="nav__link">Events</a>
+        <a href="./loading.html#teams" class="nav__link">Teams</a>
+      </nav>
+
+      <a class="btn btn--outline header__cta" href="./home.html#contact">Contact</a>
+
+      <button class="header__burger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="events-hero section">
+      <div class="container events-hero__inner">
+        <div class="events-hero__copy">
+          <p class="section__kicker">Event Archive</p>
+          <h1 class="section__title">Program details, context,<br>and image galleries.</h1>
+          <p class="events-hero__lead">
+            Explore the key events behind the OWASP MANIT program stack. Each section includes context, event highlights, a rotating slideshow, and an expandable gallery sourced from JSON.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#events-gallery">
+              <span>Browse Events</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="./home.html#programs">Back to Home</a>
+          </div>
+        </div>
+
+        <aside class="events-hero__panel">
+          <span class="pill pill--purple">JSON Driven</span>
+          <h2>Single source for image paths</h2>
+          <p>The page reads event metadata and gallery image paths from <code>events-data.json</code>, then renders the slideshow and expanded gallery with JavaScript.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="events-page section" id="events-gallery">
+      <div class="container">
+        <header class="section__header">
+          <p class="section__kicker">Programs In Focus</p>
+          <h2 class="section__title">Every event has its own<br>context and visuals.</h2>
+        </header>
+
+        <div id="events-list" class="events-page__list" aria-live="polite">
+          <article class="events-loading">
+            <span class="pill">Loading</span>
+            <h3>Loading event data...</h3>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./script.js"></script>
+  <script src="./events.js"></script>
+</body>
+</html>

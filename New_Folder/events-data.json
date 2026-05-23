@@ -1,0 +1,69 @@
+{
+  "events": [
+    {
+      "id": "cyberbasics-1-0",
+      "name": "CyberBasics 1.0",
+      "status": "Foundation Track",
+      "tagline": "Beginner onboarding for secure digital instincts.",
+      "summary": "CyberBasics 1.0 introduced core cyber hygiene concepts through practical awareness sessions. The event focused on phishing defense, ransomware awareness, and making security thinking accessible to a broader student audience.",
+      "context": "Designed as a first-touch program, this event helped new participants build vocabulary, recognize common online threats, and understand how everyday security mistakes can be prevented.",
+      "highlights": [
+        "Phishing identification and response basics",
+        "Ransomware case-study walkthroughs",
+        "Digital safety habits for students and creators"
+      ],
+      "coverImage": "../images/cyberbasics/poster.jpg",
+      "images": [
+        "../images/cyberbasics/poster.jpg",
+        "../images/cyberbasics/1.JPG",
+        "../images/cyberbasics/2.JPG",
+        "../images/cyberbasics/3.JPG",
+        "../images/cyberbasics/4.JPG",
+        "../images/cyberbasics/6.JPG",
+        "../images/cyberbasics/7.JPG",
+        "../images/cyberbasics/8.JPG",
+        "../images/cyberbasics/9.JPG"
+      ]
+    },
+    {
+      "id": "owasp-manit-ctf",
+      "name": "OWASP MANIT CTF",
+      "status": "Competition Track",
+      "tagline": "High-pressure challenge arena for practical offense.",
+      "summary": "The OWASP MANIT CTF brought participants into a challenge-driven environment covering web exploitation, cryptography, forensics, and reverse engineering. It rewarded curiosity, speed, and technical precision.",
+      "context": "Structured as a jeopardy-style competition, the event translated theoretical security topics into hands-on problem solving and exposed participants to realistic attacker and defender workflows.",
+      "highlights": [
+        "Multi-category challenge board",
+        "Hands-on web, crypto, and forensics tasks",
+        "Collaborative learning under time pressure"
+      ],
+      "coverImage": "../images/ctf/poster.jpg",
+      "images": [
+        "../images/ctf/poster.jpg",
+        "../images/ctf/ctf.jpg",
+        "../images/ctf/ctf2.jpg",
+        "../images/ctf/ctf3.jpg",
+        "../images/ctf/ctf4.jpg"
+      ]
+    },
+    {
+      "id": "cyberhunter-ops",
+      "name": "CyberHunter Ops",
+      "status": "Advanced Operations",
+      "tagline": "Scenario-led drills for threat hunting and security operations.",
+      "summary": "CyberHunter Ops focused on investigation thinking, threat detection patterns, and fast response coordination. It pushed participants beyond awareness into analyst-style decision making and operational reasoning.",
+      "context": "Built as a deeper technical lane, the event emphasized telemetry awareness, incident analysis, and collaborative workflows that mirror security operations and threat hunting environments.",
+      "highlights": [
+        "Scenario-based investigation flow",
+        "Threat hunting and detection mindset",
+        "Team coordination under simulated pressure"
+      ],
+      "coverImage": "../images/ch/poster.jpg",
+      "images": [
+        "../images/ch/poster.jpg",
+        "../images/ch/1.jpg",
+        "../images/ch/cyberhntr.jpg"
+      ]
+    }
+  ]
+}
