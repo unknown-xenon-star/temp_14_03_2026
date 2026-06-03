@@ -8,14 +8,16 @@ const renderHighlights = (highlights = []) =>
 
 const renderGallery = (images = [], title = "") =>
   images.map((src, index) => `
-    <figure class="event-gallery__item${index >= INITIAL_GALLERY_LIMIT ? " event-gallery__item--extra" : ""}"${index >= INITIAL_GALLERY_LIMIT ? " hidden" : ""}>
+    <button class="event-gallery__item${index === 0 ? " is-active" : ""}${index >= INITIAL_GALLERY_LIMIT ? " event-gallery__item--extra" : ""}" type="button" data-slide-index="${index}" aria-label="Show ${title} image ${index + 1}"${index >= INITIAL_GALLERY_LIMIT ? " hidden" : ""}>
       <img src="${src}" alt="${title} gallery image ${index + 1}" loading="lazy">
-    </figure>
+    </button>
   `).join("");
 
 const renderEvent = (event) => {
   const firstImage = event.coverImage || event.images[0] || "";
   const hasHiddenImages = event.images.length > INITIAL_GALLERY_LIMIT;
+  const hiddenImageCount = Math.max(event.images.length - INITIAL_GALLERY_LIMIT, 0);
+  const hiddenImageLabel = hiddenImageCount === 1 ? "image" : "images";
 
   return `
     <article class="event-detail reveal" id="${event.id}">
@@ -31,14 +33,18 @@ const renderEvent = (event) => {
             ${renderHighlights(event.highlights)}
           </ul>
         </div>
-        ${hasHiddenImages ? '<button class="btn btn--ghost event-detail__expand" type="button" aria-expanded="false">Show all images</button>' : ""}
+        ${hasHiddenImages ? `<button class="btn btn--ghost event-detail__expand" type="button" aria-expanded="false" data-hidden-count="${hiddenImageCount}">Show ${hiddenImageCount} more ${hiddenImageLabel}</button>` : ""}
       </div>
 
       <div class="event-detail__media">
         <div class="event-slideshow">
           <img class="event-slideshow__active" src="${firstImage}" alt="${event.name} featured image">
-          <div class="event-slideshow__dots" aria-hidden="true">
-            ${event.images.map((_, index) => `<span class="${index === 0 ? "is-active" : ""}"></span>`).join("")}
+          ${event.images.length > 1 ? `
+            <button class="event-slideshow__control event-slideshow__control--prev" type="button" aria-label="Show previous image">Prev</button>
+            <button class="event-slideshow__control event-slideshow__control--next" type="button" aria-label="Show next image">Next</button>
+          ` : ""}
+          <div class="event-slideshow__dots" aria-label="${event.name} slideshow images">
+            ${event.images.map((_, index) => `<button class="${index === 0 ? "is-active" : ""}" type="button" data-slide-index="${index}" aria-label="Show image ${index + 1}"></button>`).join("")}
           </div>
         </div>
 
@@ -54,7 +60,10 @@ const initSlideshows = () => {
   document.querySelectorAll(".event-detail").forEach((eventCard) => {
     const images = Array.from(eventCard.querySelectorAll(".event-gallery img")).map((img) => img.src);
     const activeImage = eventCard.querySelector(".event-slideshow__active");
-    const dots = Array.from(eventCard.querySelectorAll(".event-slideshow__dots span"));
+    const dots = Array.from(eventCard.querySelectorAll(".event-slideshow__dots button"));
+    const galleryButtons = Array.from(eventCard.querySelectorAll(".event-gallery__item"));
+    const prevButton = eventCard.querySelector(".event-slideshow__control--prev");
+    const nextButton = eventCard.querySelector(".event-slideshow__control--next");
     const expandButton = eventCard.querySelector(".event-detail__expand");
     const extraGalleryItems = Array.from(eventCard.querySelectorAll(".event-gallery__item--extra"));
 
@@ -65,19 +74,41 @@ const initSlideshows = () => {
       activeImage.src = images[currentIndex];
       activeImage.alt = `${eventCard.querySelector("h3")?.textContent || "Event"} image ${currentIndex + 1}`;
       dots.forEach((dot, index) => dot.classList.toggle("is-active", index === currentIndex));
+      galleryButtons.forEach((button, index) => button.classList.toggle("is-active", index === currentIndex));
+    };
+
+    const showPrevious = () => {
+      updateSlide((currentIndex - 1 + images.length) % images.length);
+    };
+
+    const showNext = () => {
+      updateSlide((currentIndex + 1) % images.length);
     };
 
     if (images.length > 1) {
       window.setInterval(() => {
-        updateSlide((currentIndex + 1) % images.length);
+        showNext();
       }, 2800);
+
+      prevButton?.addEventListener("click", showPrevious);
+      nextButton?.addEventListener("click", showNext);
     }
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => updateSlide(Number(dot.dataset.slideIndex || 0)));
+    });
+
+    galleryButtons.forEach((button) => {
+      button.addEventListener("click", () => updateSlide(Number(button.dataset.slideIndex || 0)));
+    });
 
     if (expandButton && extraGalleryItems.length) {
       expandButton.addEventListener("click", () => {
         const isExpanded = expandButton.getAttribute("aria-expanded") === "true";
+        const hiddenCount = Number(expandButton.dataset.hiddenCount || extraGalleryItems.length);
+        const hiddenImageLabel = hiddenCount === 1 ? "image" : "images";
         expandButton.setAttribute("aria-expanded", String(!isExpanded));
-        expandButton.textContent = isExpanded ? "Show all images" : "Hide extra images";
+        expandButton.textContent = isExpanded ? `Show ${hiddenCount} more ${hiddenImageLabel}` : "Hide extra images";
         extraGalleryItems.forEach((item) => {
           item.hidden = isExpanded;
         });
