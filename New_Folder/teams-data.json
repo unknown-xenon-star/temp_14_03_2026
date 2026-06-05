@@ -126,30 +126,30 @@
           "name": "Kavya Chanap",
           "role": "Design Team",
           "fallback": "KC",
-          "image": "../owasp_team_files/1743581424738",
+          "image": "../owasp_team_files/Kavya-Chanap.jpeg",
           "socials": {
             "instagram": "https://www.instagram.com/_gautampratap/",
-            "linkedin": "https://www.linkedin.com/in/gautampratap/"
+            "linkedin": "https://www.linkedin.com/in/kavya-chanap-05537b348?utm_source=share_via&utm_content=profile&utm_medium=member_android"
           }
         },
         {
           "name": "Sanjana Kori",
           "role": "Design Team",
           "fallback": "SK",
-          "image": "../owasp_team_files/1748593863178",
+          "image": "../owasp_team_files/Sanjna-Kori.jpeg",
           "socials": {
             "instagram": "https://www.instagram.com/_gautampratap/",
-            "linkedin": "https://www.linkedin.com/in/gautampratap/"
+            "linkedin": "https://www.linkedin.com/in/sanjna-kori-245b5232b?utm_source=share_via&utm_content=profile&utm_medium=member_android"
           }
         },
         {
           "name": "Raghav Verma",
           "role": "Design Team",
           "fallback": "RV",
-          "image": "../owasp_team_files/raghav-verma.jpg",
+          "image": "../owasp_team_files/Raghav-Verma.jpeg",
           "socials": {
             "instagram": "https://www.instagram.com/_gautampratap/",
-            "linkedin": "https://www.linkedin.com/in/gautampratap/"
+            "linkedin": "https://www.linkedin.com/in/raghav-verma-9b845a318?utm_source=share_via&utm_content=profile&utm_medium=member_android"
           }
         }
       ]
@@ -164,10 +164,10 @@
           "name": "Khushboo Gond",
           "role": "Promotion Lead",
           "fallback": "KG",
-          "image": "../owasp_team_files/1742045362950",
+          "image": "../owasp_team_files/Khushboo-Gond.jpeg",
           "socials": {
             "instagram": "https://www.instagram.com/_gautampratap/",
-            "linkedin": "https://www.linkedin.com/in/gautampratap/"
+            "linkedin": "https://www.linkedin.com/in/khushboo-gond-046919356?utm_source=share_via&utm_content=profile&utm_medium=member_android"
           }
         },
         {
@@ -234,10 +234,10 @@
           "name": "Mudit Kalya",
           "role": "Sponsorship Team",
           "fallback": "MK",
-          "image": "../owasp_team_files/1729002352008",
+          "image": "../owasp_team_files/Mudit-Kalya.jpeg",
           "socials": {
             "instagram": "https://www.instagram.com/_gautampratap/",
-            "linkedin": "https://www.linkedin.com/in/gautampratap/"
+            "linkedin": "https://www.linkedin.com/in/mudit-kalya-884479324?utm_source=share_via&utm_content=profile&utm_medium=member_android"
           }
         }
       ]
