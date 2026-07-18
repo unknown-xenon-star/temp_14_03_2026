@@ -1,135 +1,202 @@
 "use strict";
 
 const eventsRoot = document.getElementById("events-list");
-const INITIAL_GALLERY_LIMIT = 8;
+const overviewRoot = document.getElementById("events-overview");
+const featuredTitle = document.getElementById("featured-event-heading");
+const featuredCopy = document.getElementById("featured-event-copy");
+const featuredMeta = document.getElementById("featured-event-meta");
+const featuredLink = document.getElementById("featured-event-link");
 
-const renderHighlights = (highlights = []) =>
-  highlights.map((item) => `<li>${item}</li>`).join("");
+const safeArray = (value) => Array.isArray(value) ? value : [];
 
-const renderGallery = (images = [], title = "") =>
-  images.map((src, index) => `
-    <button class="event-gallery__item${index === 0 ? " is-active" : ""}${index >= INITIAL_GALLERY_LIMIT ? " event-gallery__item--extra" : ""}" type="button" data-slide-index="${index}" aria-label="Show ${title} image ${index + 1}"${index >= INITIAL_GALLERY_LIMIT ? " hidden" : ""}>
-      <img src="${src}" alt="${title} gallery image ${index + 1}" loading="lazy">
-    </button>
-  `).join("");
+const parseEventDate = (value) => {
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.valueOf()) ? null : parsed;
+};
 
-const renderEvent = (event) => {
-  const hasImages = event.images && event.images.length > 0;
-  const firstImage = event.coverImage || (hasImages ? event.images[0] : "") || "";
-  const hasHiddenImages = hasImages && event.images.length > INITIAL_GALLERY_LIMIT;
-  const hiddenImageCount = hasImages ? Math.max(event.images.length - INITIAL_GALLERY_LIMIT, 0) : 0;
-  const hiddenImageLabel = hiddenImageCount === 1 ? "image" : "images";
+const formatEventDate = (value) => {
+  const parsed = parseEventDate(value);
+  if (!parsed) return "Date TBD";
+  return parsed.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+};
+
+const getTimelineStatus = (event) => {
+  if (event?.timelineStatus) return event.timelineStatus;
+  const parsed = parseEventDate(event?.date);
+  if (!parsed) return "TBD";
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return parsed < today ? "Past" : "Upcoming";
+};
+
+const sortEventsByDate = (events = []) =>
+  [...events].sort((a, b) => {
+    const left = parseEventDate(a?.date)?.valueOf() ?? 0;
+    const right = parseEventDate(b?.date)?.valueOf() ?? 0;
+    return right - left;
+  });
+
+const getFeaturedEvent = (events = []) => {
+  const featured = events.find((event) => event?.featured === true);
+  return featured || sortEventsByDate(events)[0] || null;
+};
+
+const escapeHtml = (value = "") =>
+  String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
+const createChip = (label, variant = "") =>
+  `<span class="event-chip${variant ? ` ${variant}` : ""}">${escapeHtml(label)}</span>`;
+
+const getBentoVariant = (index = 0, total = 0) => {
+  if (index === 0) return "event-card--hero";
+  if (total <= 2) return "event-card--wide";
+
+  const pattern = [
+    "event-card--tall",
+    "event-card--wide",
+    "event-card--standard",
+    "event-card--compact",
+  ];
+
+  return pattern[(index - 1) % pattern.length];
+};
+
+const renderFeaturedPanel = (event) => {
+  if (!event || !featuredTitle || !featuredCopy || !featuredMeta || !featuredLink) return;
+
+  featuredTitle.textContent = event.name || "Featured event";
+  featuredCopy.textContent = event.whyItMattered || event.summary || "Explore the most important event from the archive.";
+
+  const meta = [
+    formatEventDate(event.date),
+    event.category,
+    getTimelineStatus(event),
+    event.targetAudience,
+  ].filter(Boolean);
+
+  featuredMeta.innerHTML = meta.map((item) => `<span>${escapeHtml(item)}</span>`).join("");
+  featuredLink.href = event.id ? `./event.html?id=${encodeURIComponent(event.id)}` : "#events-gallery";
+  featuredLink.textContent = getTimelineStatus(event) === "Upcoming" ? "View event plan" : "View event recap";
+};
+
+const renderOverview = (events = []) => {
+  if (!overviewRoot) return;
+
+  const categories = [...new Set(events.map((event) => event.category).filter(Boolean))];
+  const latest = sortEventsByDate(events)[0];
+  const featured = getFeaturedEvent(events);
+
+  const values = [
+    String(events.length),
+    categories.length ? categories.join(", ") : "—",
+    latest?.name || "—",
+    featured?.name || "—",
+  ];
+
+  const valueNodes = overviewRoot.querySelectorAll(".events-overview__value");
+  valueNodes.forEach((node, index) => {
+    node.textContent = values[index] || "—";
+  });
+};
+
+const renderEventCard = (event, index = 0, total = 0) => {
+  const images = safeArray(event.images);
+  const firstImage = event.coverImage || images[0] || "";
+  const galleryCount = Math.max(images.length - 1, 0);
+  const timelineStatus = getTimelineStatus(event);
+  const statusClass = timelineStatus.toLowerCase() === "upcoming"
+    ? "event-chip--status-upcoming"
+    : "event-chip--status-past";
+  const detailCta = timelineStatus === "Upcoming" ? "View event plan" : "View full recap";
+  const layoutClass = getBentoVariant(index, total);
+
+  const chips = [
+    createChip(timelineStatus, statusClass),
+    event.category ? createChip(event.category, "event-chip--accent") : "",
+    event.status ? createChip(event.status) : "",
+  ].join("");
+
+  const metaItems = [
+    event.date ? `<span>${escapeHtml(formatEventDate(event.date))}</span>` : "",
+    event.venue ? `<span>${escapeHtml(event.venue)}</span>` : "",
+    event.targetAudience ? `<span>${escapeHtml(event.targetAudience)}</span>` : "",
+  ].join("");
 
   return `
-    <article class="event-detail reveal${!hasImages ? " event-detail--no-media" : ""}" id="${event.id}">
-      <div class="event-detail__content">
-        <span class="pill">${event.status}</span>
-        <h3>${event.name}</h3>
-        <p class="event-detail__tagline">${event.tagline}</p>
-        <p class="event-detail__summary">${event.summary}</p>
-        <p class="event-detail__context">${event.context}</p>
-        <div class="event-detail__block">
-          <h4>Highlights</h4>
-          <ul class="event-detail__highlights">
-            ${renderHighlights(event.highlights)}
-          </ul>
+    <article class="event-card ${layoutClass} reveal" id="preview-${escapeHtml(event.id)}">
+      <a class="event-card__media" href="./event.html?id=${encodeURIComponent(event.id)}" aria-label="Open ${escapeHtml(event.name)} details">
+        ${firstImage ? `<img src="${escapeHtml(firstImage)}" alt="${escapeHtml(event.name)} poster or featured event image" loading="lazy">` : ""}
+        <span class="event-card__gallery-count">${galleryCount > 0 ? `${galleryCount} gallery photos` : "Poster only"}</span>
+      </a>
+      <div class="event-card__body">
+        <div class="event-card__chips">${chips}</div>
+        <div>
+          <h3 class="event-card__title">${escapeHtml(event.name)}</h3>
+          ${event.tagline ? `<p class="event-card__tagline">${escapeHtml(event.tagline)}</p>` : ""}
         </div>
-        ${hasHiddenImages ? `<button class="btn btn--ghost event-detail__expand" type="button" aria-expanded="false" data-hidden-count="${hiddenImageCount}">Show ${hiddenImageCount} more ${hiddenImageLabel}</button>` : ""}
-      </div>
-
-      ${hasImages ? `
-      <div class="event-detail__media">
-        <div class="event-slideshow">
-          <img class="event-slideshow__active" src="${firstImage}" alt="${event.name} featured image">
-          ${event.images.length > 1 ? `
-            <button class="event-slideshow__control event-slideshow__control--prev" type="button" aria-label="Show previous image">Prev</button>
-            <button class="event-slideshow__control event-slideshow__control--next" type="button" aria-label="Show next image">Next</button>
-          ` : ""}
-          <div class="event-slideshow__dots" aria-label="${event.name} slideshow images">
-            ${event.images.map((_, index) => `<button class="${index === 0 ? "is-active" : ""}" type="button" data-slide-index="${index}" aria-label="Show image ${index + 1}"></button>`).join("")}
-          </div>
-        </div>
-
-        <div class="event-gallery">
-          ${renderGallery(event.images, event.name)}
+        ${event.summary ? `<p class="event-card__summary">${escapeHtml(event.summary)}</p>` : ""}
+        <div class="event-card__meta">${metaItems}</div>
+        <div class="event-card__footer">
+          <a class="event-card__link" href="./event.html?id=${encodeURIComponent(event.id)}">${escapeHtml(detailCta)}</a>
         </div>
       </div>
-      ` : ""}
     </article>
   `;
 };
 
-const initSlideshows = () => {
-  document.querySelectorAll(".event-detail").forEach((eventCard) => {
-    const images = Array.from(eventCard.querySelectorAll(".event-gallery img")).map((img) => img.src);
-    const activeImage = eventCard.querySelector(".event-slideshow__active");
-    const dots = Array.from(eventCard.querySelectorAll(".event-slideshow__dots button"));
-    const galleryButtons = Array.from(eventCard.querySelectorAll(".event-gallery__item"));
-    const prevButton = eventCard.querySelector(".event-slideshow__control--prev");
-    const nextButton = eventCard.querySelector(".event-slideshow__control--next");
-    const expandButton = eventCard.querySelector(".event-detail__expand");
-    const extraGalleryItems = Array.from(eventCard.querySelectorAll(".event-gallery__item--extra"));
+const renderEvents = (events = [], category = "All") => {
+  const filtered = category === "All"
+    ? events
+    : events.filter((event) => String(event.category || "").toLowerCase() === String(category).toLowerCase());
 
-    let currentIndex = 0;
+  if (!filtered.length) {
+    return `
+      <article class="events-loading">
+        <span class="pill">No results</span>
+        <h3>No ${escapeHtml(category)} events found.</h3>
+        <p>Try another category or come back when more verified event entries are added.</p>
+      </article>
+    `;
+  }
 
-    const updateSlide = (nextIndex) => {
-      currentIndex = nextIndex;
-      activeImage.src = images[currentIndex];
-      activeImage.alt = `${eventCard.querySelector("h3")?.textContent || "Event"} image ${currentIndex + 1}`;
-      dots.forEach((dot, index) => dot.classList.toggle("is-active", index === currentIndex));
-      galleryButtons.forEach((button, index) => button.classList.toggle("is-active", index === currentIndex));
-    };
-
-    const showPrevious = () => {
-      updateSlide((currentIndex - 1 + images.length) % images.length);
-    };
-
-    const showNext = () => {
-      updateSlide((currentIndex + 1) % images.length);
-    };
-
-    if (images.length > 1) {
-      window.setInterval(() => {
-        showNext();
-      }, 2800);
-
-      prevButton?.addEventListener("click", showPrevious);
-      nextButton?.addEventListener("click", showNext);
-    }
-
-    dots.forEach((dot) => {
-      dot.addEventListener("click", () => updateSlide(Number(dot.dataset.slideIndex || 0)));
-    });
-
-    galleryButtons.forEach((button) => {
-      button.addEventListener("click", () => updateSlide(Number(button.dataset.slideIndex || 0)));
-    });
-
-    if (expandButton && extraGalleryItems.length) {
-      expandButton.addEventListener("click", () => {
-        const isExpanded = expandButton.getAttribute("aria-expanded") === "true";
-        const hiddenCount = Number(expandButton.dataset.hiddenCount || extraGalleryItems.length);
-        const hiddenImageLabel = hiddenCount === 1 ? "image" : "images";
-        expandButton.setAttribute("aria-expanded", String(!isExpanded));
-        expandButton.textContent = isExpanded ? `Show ${hiddenCount} more ${hiddenImageLabel}` : "Hide extra images";
-        extraGalleryItems.forEach((item) => {
-          item.hidden = isExpanded;
-        });
-      });
-    }
-  });
+  const sortedEvents = sortEventsByDate(filtered);
+  return sortedEvents.map((event, index) => renderEventCard(event, index, sortedEvents.length)).join("");
 };
 
-const scrollToHashTarget = () => {
-  const hash = window.location.hash;
-  if (!hash) return;
+const updateFilterState = (selectedCategory, events, buttons) => {
+  buttons.forEach((button) => {
+    const isActive = button.dataset.category === selectedCategory;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
 
-  const target = document.querySelector(hash);
-  if (target) {
-    window.requestAnimationFrame(() => {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
+  if (!eventsRoot) return;
+  eventsRoot.innerHTML = renderEvents(events, selectedCategory);
+
+  if (typeof revealObs !== "undefined") {
+    document.querySelectorAll(".event-card").forEach((item) => revealObs.observe(item));
   }
+};
+
+const initFilterControls = (events = []) => {
+  const filterButtons = Array.from(document.querySelectorAll(".events-filter__item"));
+  if (!filterButtons.length) return;
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const nextCategory = button.dataset.category || "All";
+      updateFilterState(nextCategory, events, filterButtons);
+    });
+  });
 };
 
 const initEventPage = async () => {
@@ -141,20 +208,18 @@ const initEventPage = async () => {
 
     const data = await response.json();
     const events = Array.isArray(data.events) ? data.events : [];
-    eventsRoot.innerHTML = events.map(renderEvent).join("");
+    const filterButtons = Array.from(document.querySelectorAll(".events-filter__item"));
 
-    if (typeof window.revealObs !== "undefined") {
-      document.querySelectorAll(".event-detail").forEach((el) => window.revealObs.observe(el));
-    }
-
-    initSlideshows();
-    scrollToHashTarget();
+    renderOverview(events);
+    renderFeaturedPanel(getFeaturedEvent(events));
+    updateFilterState("All", events, filterButtons);
+    initFilterControls(events);
   } catch (error) {
     eventsRoot.innerHTML = `
-      <article class="events-loading events-loading--error">
+      <article class="events-loading">
         <span class="pill pill--purple">Error</span>
         <h3>Could not load events data.</h3>
-        <p>${error.message}</p>
+        <p>${escapeHtml(error.message)}</p>
       </article>
     `;
   }

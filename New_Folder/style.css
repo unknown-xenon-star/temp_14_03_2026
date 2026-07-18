@@ -236,7 +236,11 @@ h1, h2, h3, h4, .brand__name, .counter {
 
 /* ── PILLS ───────────────────────────────────────────────── */
 .pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  vertical-align: middle;
   padding: 0.3rem 0.85rem;
   border-radius: 999px;
   font-size: 0.7rem;
@@ -248,6 +252,7 @@ h1, h2, h3, h4, .brand__name, .counter {
   border: 1px solid rgba(0,229,255,0.3);
   color: var(--cyan);
   margin-bottom: 0.85rem;
+  line-height: 1;
 }
 .pill--purple {
   background: var(--purple-dim);
