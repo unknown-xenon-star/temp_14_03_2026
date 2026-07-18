@@ -71,4 +71,77 @@ const initTeamPage = async () => {
   }
 };
 
+const initSlideshow = () => {
+  const slideshow = document.getElementById("ctf-slideshow");
+  if (!slideshow) return;
+
+  const slides = Array.from(slideshow.querySelectorAll(".team-slideshow__slide"));
+  const indicators = Array.from(slideshow.querySelectorAll(".team-slideshow__indicators .indicator"));
+  const prevBtn = slideshow.querySelector(".team-slideshow__btn--prev");
+  const nextBtn = slideshow.querySelector(".team-slideshow__btn--next");
+
+  if (!slides.length) return;
+
+  let currentIndex = 0;
+  let autoplayTimer = null;
+  const AUTOPLAY_DELAY = 4000;
+
+  const goToSlide = (index) => {
+    slides[currentIndex].classList.remove("is-active");
+    if (indicators[currentIndex]) {
+      indicators[currentIndex].classList.remove("is-active");
+    }
+
+    currentIndex = (index + slides.length) % slides.length;
+
+    slides[currentIndex].classList.add("is-active");
+    if (indicators[currentIndex]) {
+      indicators[currentIndex].classList.add("is-active");
+    }
+  };
+
+  const nextSlide = () => goToSlide(currentIndex + 1);
+  const prevSlide = () => goToSlide(currentIndex - 1);
+
+  const startAutoplay = () => {
+    stopAutoplay();
+    autoplayTimer = setInterval(nextSlide, AUTOPLAY_DELAY);
+  };
+
+  const stopAutoplay = () => {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  };
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      prevSlide();
+      startAutoplay();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      nextSlide();
+      startAutoplay();
+    });
+  }
+
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener("click", () => {
+      goToSlide(index);
+      startAutoplay();
+    });
+  });
+
+  slideshow.addEventListener("mouseenter", stopAutoplay);
+  slideshow.addEventListener("mouseleave", startAutoplay);
+
+  startAutoplay();
+};
+
 initTeamPage();
+initSlideshow();
+

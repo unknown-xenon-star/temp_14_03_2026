@@ -64,6 +64,75 @@
       </div>
     </section>
 
+    <section class="section team-slideshow-section">
+      <div class="container">
+        <header class="section__header">
+          <p class="section__kicker">CTF In Action</p>
+          <h2 class="section__title">Moments from our latest<br>OWASP MANIT CTF.</h2>
+        </header>
+
+        <div class="team-slideshow" id="ctf-slideshow">
+          <div class="team-slideshow__track">
+            <!-- Slide 1 -->
+            <div class="team-slideshow__slide is-active" data-index="0">
+              <img src="../images/ctf/ctf.jpg" alt="CTF Competition Event">
+              <div class="team-slideshow__caption">
+                <h3>Intense Hacking</h3>
+                <p>Participants solving reverse engineering and web exploitation challenges.</p>
+              </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="team-slideshow__slide" data-index="1">
+              <img src="../images/ctf/ctf2.jpg" alt="Team Collaboration">
+              <div class="team-slideshow__caption">
+                <h3>Collaborative Problem Solving</h3>
+                <p>Teams working together to secure the flag and climb the leaderboard.</p>
+              </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="team-slideshow__slide" data-index="2">
+              <img src="../images/ctf/ctf3.jpg" alt="CTF Platform Dashboard">
+              <div class="team-slideshow__caption">
+                <h3>Live Scoreboard</h3>
+                <p>Real-time updates as teams submit flags and battle for top ranks.</p>
+              </div>
+            </div>
+            <!-- Slide 4 -->
+            <div class="team-slideshow__slide" data-index="3">
+              <img src="../images/ctf/ctf4.jpg" alt="Mentors and Organizers">
+              <div class="team-slideshow__caption">
+                <h3>Expert Guidance</h3>
+                <p>OWASP MANIT mentors assisting and guiding participants throughout the event.</p>
+              </div>
+            </div>
+            <!-- Slide 5 -->
+            <div class="team-slideshow__slide" data-index="4">
+              <img src="../images/ctf/poster.jpg" alt="Official CTF Poster">
+              <div class="team-slideshow__caption">
+                <h3>Official Event Poster</h3>
+                <p>Annual flagship Capture The Flag competition announcement.</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="team-slideshow__btn team-slideshow__btn--prev" aria-label="Previous Slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="team-slideshow__btn team-slideshow__btn--next" aria-label="Next Slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+
+          <div class="team-slideshow__indicators">
+            <button class="indicator is-active" data-slide="0" aria-label="Slide 1"></button>
+            <button class="indicator" data-slide="1" aria-label="Slide 2"></button>
+            <button class="indicator" data-slide="2" aria-label="Slide 3"></button>
+            <button class="indicator" data-slide="3" aria-label="Slide 4"></button>
+            <button class="indicator" data-slide="4" aria-label="Slide 5"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section">
       <div class="container team-directory">
         <div id="team-directory-root" class="team-directory__root" aria-live="polite">
