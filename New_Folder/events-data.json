@@ -1,16 +1,61 @@
 {
   "events": [
     {
-      "id": "cyberbasics-1-0",
-      "name": "CyberBasics 1.0",
-      "status": "Foundation Track",
-      "tagline": "Beginner onboarding for secure digital instincts.",
-      "summary": "CyberBasics 1.0 introduced core cyber hygiene concepts through practical awareness sessions. The event focused on phishing defense, ransomware awareness, and making security thinking accessible to a broader student audience.",
-      "context": "Designed as a first-touch program, this event helped new participants build vocabulary, recognize common online threats, and understand how everyday security mistakes can be prevented.",
+      "id": "netshield-workshop",
+      "name": "Netshield Workshop",
+      "status": "Upcoming Workshop",
+      "tagline": "Practical exposure to ethical hacking, networking, and system defense.",
+      "summary": "A hands-on workshop focused on ethical hacking, networking, and cybersecurity fundamentals, designed to provide participants with practical exposure to modern security concepts.",
+      "context": "The session covered network architecture, common security vulnerabilities, ethical hacking methodologies, and real-world attack and defense techniques through interactive demonstrations. Participants gained valuable insights into securing digital systems while building a strong foundation in cybersecurity awareness and best practices.",
       "highlights": [
-        "Phishing identification and response basics",
-        "Ransomware case-study walkthroughs",
-        "Digital safety habits for students and creators"
+        "Hands-on ethical hacking and networking labs",
+        "Network architecture and security vulnerability overviews",
+        "Real-world attack and defense simulation sessions"
+      ],
+      "coverImage": "",
+      "images": []
+    },
+    {
+      "id": "noobathon",
+      "name": "Noobathon",
+      "status": "Hackathon Track",
+      "tagline": "Beginner hackathon introducing core InfoSec and UI/UX challenges.",
+      "summary": "A beginner-friendly hackathon focused on Information Security awareness and UI/UX, designed to introduce participants to cybersecurity concepts through hands-on challenges and collaborative problem-solving.",
+      "context": "The event brought together 400+ participants, including 150+ students from LNCT, IISER, IES, and other institutions, fostering innovation, teamwork, and practical learning.",
+      "highlights": [
+        "Beginner-friendly InfoSec & UI/UX hackathon",
+        "400+ total participants, including 150+ from external colleges",
+        "Hands-on security challenges and collaborative problem-solving"
+      ],
+      "coverImage": "",
+      "images": []
+    },
+    {
+      "id": "cyberhunter-2-0",
+      "name": "CyberHunter 2.0",
+      "status": "Competition Track",
+      "tagline": "Advanced cybersecurity competition with real-world challenge tracks.",
+      "summary": "CyberHunter 2.0 was an advanced cybersecurity competition featuring real-world security challenges, Capture the Flag (CTF) tasks, and problem-solving exercises.",
+      "context": "Participants enhanced their skills in ethical hacking, cryptography, web security, and digital forensics while competing in a fast-paced, collaborative environment.",
+      "highlights": [
+        "Advanced Capture the Flag (CTF) tasks",
+        "Hands-on exercises in ethical hacking & cryptography",
+        "Focus on web security and digital forensics under time pressure"
+      ],
+      "coverImage": "",
+      "images": []
+    },
+    {
+      "id": "cyberbasics-1-0",
+      "name": "Cyber Basics 1.0",
+      "status": "Foundation Track",
+      "tagline": "Introductory cybersecurity workshop aimed at beginners.",
+      "summary": "Cyber Basics 1.0 was an introductory cybersecurity workshop aimed at beginners interested in Information Security.",
+      "context": "The session covered essential concepts such as cyber hygiene, networking fundamentals, common cyber threats, and basic defense techniques through interactive demonstrations and practical learning activities.",
+      "highlights": [
+        "Cyber hygiene and security foundations",
+        "Networking basics and common cyber threat overviews",
+        "Interactive demonstrations and defensive techniques"
       ],
       "coverImage": "../images/cyberbasics/poster.jpg",
       "images": [
@@ -26,16 +71,16 @@
       ]
     },
     {
-      "id": "owasp-manit-ctf",
-      "name": "OWASP MANIT CTF",
+      "id": "owasp-ctf",
+      "name": "OWASP CTF",
       "status": "Competition Track",
-      "tagline": "High-pressure challenge arena for practical offense.",
-      "summary": "The OWASP MANIT CTF brought participants into a challenge-driven environment covering web exploitation, cryptography, forensics, and reverse engineering. It rewarded curiosity, speed, and technical precision.",
-      "context": "Structured as a jeopardy-style competition, the event translated theoretical security topics into hands-on problem solving and exposed participants to realistic attacker and defender workflows.",
+      "tagline": "Vulnerability exploitation challenges based on OWASP Top 10.",
+      "summary": "The OWASP Capture the Flag (CTF) competition challenged participants to identify and exploit common web application vulnerabilities based on the OWASP Top 10.",
+      "context": "The event provided hands-on experience in web security, secure coding practices, and vulnerability assessment while encouraging teamwork and critical thinking.",
       "highlights": [
-        "Multi-category challenge board",
-        "Hands-on web, crypto, and forensics tasks",
-        "Collaborative learning under time pressure"
+        "Exploitation of OWASP Top 10 web vulnerabilities",
+        "Hands-on experience in secure coding and assessment",
+        "Teamwork-driven security challenge environment"
       ],
       "coverImage": "../images/ctf/poster.jpg",
       "images": [
@@ -47,23 +92,22 @@
       ]
     },
     {
-      "id": "cyberhunter-ops",
-      "name": "CyberHunter Ops",
+      "id": "cyberhunter-1-0",
+      "name": "Cyber Hunter 1.0",
       "status": "Advanced Operations",
-      "tagline": "Scenario-led drills for threat hunting and security operations.",
-      "summary": "CyberHunter Ops focused on investigation thinking, threat detection patterns, and fast response coordination. It pushed participants beyond awareness into analyst-style decision making and operational reasoning.",
-      "context": "Built as a deeper technical lane, the event emphasized telemetry awareness, incident analysis, and collaborative workflows that mirror security operations and threat hunting environments.",
+      "tagline": "Interactive cryptography and strategic problem-solving puzzle arena.",
+      "summary": "Cyber Hunter 1.0 was an interactive cybersecurity challenge centered on cryptography, logical reasoning, and strategic problem-solving. Participants decoded clues, solved security puzzles, and completed multiple challenge stages in a competitive environment.",
+      "context": "The event attracted 500+ participants, providing students with an engaging platform to test and strengthen their analytical and cybersecurity skills.",
       "highlights": [
-        "Scenario-based investigation flow",
-        "Threat hunting and detection mindset",
-        "Team coordination under simulated pressure"
+        "Interactive cryptography and logic puzzles",
+        "Multi-stage challenge map for problem-solving",
+        "Attracted 500+ active participants testing security skills"
       ],
       "coverImage": "../images/ch/poster.jpg",
       "images": [
         "../images/ch/poster.jpg",
         "../images/ch/1.jpg",
         "../images/ch/cyberhntr.jpg"
-      ]
     }
   ]
 }

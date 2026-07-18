@@ -14,13 +14,14 @@ const renderGallery = (images = [], title = "") =>
   `).join("");
 
 const renderEvent = (event) => {
-  const firstImage = event.coverImage || event.images[0] || "";
-  const hasHiddenImages = event.images.length > INITIAL_GALLERY_LIMIT;
-  const hiddenImageCount = Math.max(event.images.length - INITIAL_GALLERY_LIMIT, 0);
+  const hasImages = event.images && event.images.length > 0;
+  const firstImage = event.coverImage || (hasImages ? event.images[0] : "") || "";
+  const hasHiddenImages = hasImages && event.images.length > INITIAL_GALLERY_LIMIT;
+  const hiddenImageCount = hasImages ? Math.max(event.images.length - INITIAL_GALLERY_LIMIT, 0) : 0;
   const hiddenImageLabel = hiddenImageCount === 1 ? "image" : "images";
 
   return `
-    <article class="event-detail reveal" id="${event.id}">
+    <article class="event-detail reveal${!hasImages ? " event-detail--no-media" : ""}" id="${event.id}">
       <div class="event-detail__content">
         <span class="pill">${event.status}</span>
         <h3>${event.name}</h3>
@@ -36,6 +37,7 @@ const renderEvent = (event) => {
         ${hasHiddenImages ? `<button class="btn btn--ghost event-detail__expand" type="button" aria-expanded="false" data-hidden-count="${hiddenImageCount}">Show ${hiddenImageCount} more ${hiddenImageLabel}</button>` : ""}
       </div>
 
+      ${hasImages ? `
       <div class="event-detail__media">
         <div class="event-slideshow">
           <img class="event-slideshow__active" src="${firstImage}" alt="${event.name} featured image">
@@ -52,6 +54,7 @@ const renderEvent = (event) => {
           ${renderGallery(event.images, event.name)}
         </div>
       </div>
+      ` : ""}
     </article>
   `;
 };
@@ -140,8 +143,8 @@ const initEventPage = async () => {
     const events = Array.isArray(data.events) ? data.events : [];
     eventsRoot.innerHTML = events.map(renderEvent).join("");
 
-    if (typeof revealObs !== "undefined") {
-      document.querySelectorAll(".event-detail").forEach((el) => revealObs.observe(el));
+    if (typeof window.revealObs !== "undefined") {
+      document.querySelectorAll(".event-detail").forEach((el) => window.revealObs.observe(el));
     }
 
     initSlideshows();

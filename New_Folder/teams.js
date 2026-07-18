@@ -57,8 +57,8 @@ const initTeamPage = async () => {
 
     teamDirectoryRoot.innerHTML = teams.map(renderTeamCluster).join("");
 
-    if (typeof revealObs !== "undefined") {
-      document.querySelectorAll(".team-card.reveal").forEach((el) => revealObs.observe(el));
+    if (typeof window.revealObs !== "undefined") {
+      document.querySelectorAll(".team-card.reveal").forEach((el) => window.revealObs.observe(el));
     }
   } catch (error) {
     teamDirectoryRoot.innerHTML = `

@@ -162,6 +162,7 @@ const initRevealAnimations = () => {
   });
 
   window.revealObs = revealObs;
+
   revealEls.forEach(el => revealObs.observe(el));
 
   // Automatically apply reveal class to section elements

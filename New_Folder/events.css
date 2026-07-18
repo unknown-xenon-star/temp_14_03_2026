@@ -118,6 +118,10 @@
   padding: 2rem;
 }
 
+.event-detail--no-media {
+  grid-template-columns: 1fr;
+}
+
 .event-detail__content {
   display: flex;
   flex-direction: column;
