@@ -1,6 +1,6 @@
 # HTML Structure Report
 
-Source file: `New_Folder/index.html`
+Source file: `index.html`
 
 ## Overall Layout
 
