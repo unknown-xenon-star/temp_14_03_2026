@@ -126,7 +126,7 @@ const renderHighlights = (highlights = []) =>
 const renderGallery = (images = [], title = "") =>
   safeArray(images).map((src, index) => `
     <button class="event-gallery__item${index === 0 ? " is-active" : ""}" type="button" data-slide-index="${index}" aria-label="Show ${escapeHtml(title)} image ${index + 1}">
-      <img src="${escapeHtml(src)}" alt="${escapeHtml(title)} gallery image ${index + 1}" loading="lazy">
+      <img src="${escapeHtml(src)}" alt="${escapeHtml(title)} gallery image ${index + 1}" loading="lazy" onerror="this.onerror=null; this.src='../images/image_load_error.svg';">
     </button>
   `).join("");
 
@@ -212,7 +212,7 @@ const renderDetailPage = (event) => {
           
           ${hasImages ? `
             <div class="event-slideshow event-slideshow--glow" style="position: relative; width: 100%; height: 260px; overflow: hidden; border-radius: var(--r-md); border: 1px solid rgba(255,255,255,0.08);">
-              <img class="event-slideshow__active" src="${escapeHtml(firstImage)}" alt="${escapeHtml(event.name)} slideshow" style="width: 100%; height: 100%; object-fit: cover;">
+              <img class="event-slideshow__active" src="${escapeHtml(firstImage)}" alt="${escapeHtml(event.name)} slideshow" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='../images/image_load_error.svg';">
               ${event.images.length > 1 ? `
                 <button class="event-slideshow__control event-slideshow__control--prev" type="button" aria-label="Show previous image">Prev</button>
                 <button class="event-slideshow__control event-slideshow__control--next" type="button" aria-label="Show next image">Next</button>
