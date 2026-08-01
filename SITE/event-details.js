@@ -133,6 +133,7 @@ const renderGallery = (images = [], title = "") =>
 const renderDetailPage = (event) => {
   if (!event) {
     titleEl.textContent = "Event not found";
+    document.title = "Event Not Found | OWASP MANIT";
     descriptionEl.textContent = "The requested event could not be located.";
     return `
       <section class="event-detail-page">
@@ -147,6 +148,7 @@ const renderDetailPage = (event) => {
   }
 
   titleEl.textContent = event.name || "Event details";
+  document.title = `${event.name || "Event Details"} | OWASP MANIT`;
   descriptionEl.textContent = event.whyItMattered || event.tagline || "Explore the complete event story.";
 
   const hasImages = event.images && event.images.length > 0;
@@ -362,6 +364,7 @@ const initDetailPage = async () => {
     }
   } catch (error) {
     titleEl.textContent = "Could not load event";
+    document.title = "Error Loading Event | OWASP MANIT";
     descriptionEl.textContent = "There was a problem loading this page.";
     detailRoot.innerHTML = `
       <section class="event-detail-page">

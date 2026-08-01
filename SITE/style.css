@@ -1320,6 +1320,18 @@ h1, h2, h3, h4, .brand__name, .counter {
   letter-spacing: 0.05em;
 }
 
+.form-status.sending {
+  color: var(--cyan);
+}
+
+.form-status.success {
+  color: var(--green);
+}
+
+.form-status.error {
+  color: #ff5555;
+}
+
 /* ── FOOTER ──────────────────────────────────────────────── */
 .footer {
   padding: 2.5rem 0;
@@ -1774,8 +1786,8 @@ h1, h2, h3, h4, .brand__name, .counter {
   background: rgba(5, 10, 16, 0.72);
   width: 100%;
   aspect-ratio: 16 / 9;
-  max-height: 520px;
-  min-height: 320px;
+  max-height: 600px;
+  min-height: 360px;
   box-shadow: var(--shadow-card), 0 0 40px rgba(0, 229, 255, 0.04);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -1925,7 +1937,7 @@ h1, h2, h3, h4, .brand__name, .counter {
 @media (max-width: 768px) {
   .team-slideshow {
     aspect-ratio: 4 / 3;
-    min-height: 280px;
+    min-height: 320px;
   }
   
   .team-slideshow__btn {

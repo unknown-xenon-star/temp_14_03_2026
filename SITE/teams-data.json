@@ -201,6 +201,214 @@
           }
         }
       ]
+    },
+    {
+      "id": "upcoming-leads",
+      "kicker": "Upcoming Leads",
+      "title": "Future leadership and specialized contributors.",
+      "description": "Members preparing to step into core leadership roles and steering various chapter departments.",
+      "members": [
+        {
+          "name": "Saurav Sahu",
+          "role": "Upcoming Lead",
+          "fallback": "SS",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Sharsti Garg",
+          "role": "Upcoming Lead",
+          "fallback": "SG",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Shubham Atram",
+          "role": "Upcoming Lead",
+          "fallback": "SA",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Aditi Khatri",
+          "role": "Upcoming Lead",
+          "fallback": "AK",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Amit Baghel",
+          "role": "Upcoming Lead",
+          "fallback": "AB",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Arjit Yadav",
+          "role": "Upcoming Lead",
+          "fallback": "AY",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Chirag Gurjar",
+          "role": "Upcoming Lead",
+          "fallback": "CG",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Dev Sharma",
+          "role": "Upcoming Lead",
+          "fallback": "DS",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Harsh Rathore",
+          "role": "Upcoming Lead",
+          "fallback": "HR",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Himanshi Dangi",
+          "role": "Upcoming Lead",
+          "fallback": "HD",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Kanishk Tiwari",
+          "role": "Upcoming Lead",
+          "fallback": "KT",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Manya Mehta",
+          "role": "Upcoming Lead",
+          "fallback": "MM",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Prarthana Sharma",
+          "role": "Upcoming Lead",
+          "fallback": "PS",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Serine Ros Anto",
+          "role": "Upcoming Lead",
+          "fallback": "SR",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Shlok Gupta",
+          "role": "Upcoming Lead",
+          "fallback": "SG",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Sumit Maurya",
+          "role": "Upcoming Lead",
+          "fallback": "SM",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Viha Sooden",
+          "role": "Upcoming Lead",
+          "fallback": "VS",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Nitin Kumar",
+          "role": "Upcoming Lead",
+          "fallback": "NK",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Yashika Gupta",
+          "role": "Upcoming Lead",
+          "fallback": "YG",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        },
+        {
+          "name": "Khemendra Singh Jatav",
+          "role": "Upcoming Lead",
+          "fallback": "KJ",
+          "image": "",
+          "socials": {
+            "instagram": "",
+            "linkedin": ""
+          }
+        }
+      ]
     }
   ]
 }
